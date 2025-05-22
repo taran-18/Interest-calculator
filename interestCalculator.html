@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title>Compound Interest Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3e7;
+            border: 1px solid #4CAF50;
+            border-radius: 4px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compound Interest Calculator</h1>
+        <form id="interestForm">
+            <label for="principal">Principal Amount (₹):</label><br>
+            <input type="number" id="principal" name="principal" required><br>
+            <label for="rate">Monthly Interest Rate (%):</label><br>
+            <input type="number" id="rate" name="rate" required><br>
+            <label for="time">Time Period (Years):</label><br>
+            <input type="number" id="time" name="time" required><br><br>
+            <button type="button" onclick="calculateInterest()">Calculate</button>
+        </form>
+        <h2 id="result" class="result"></h2>
+    </div>
+
+    <script>
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            const time = parseFloat(document.getElementById('time').value);
+            
+            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                document.getElementById('result').textContent = 'Please enter valid numbers';
+                return;
+            }
+            
+            const amount = principal * Math.pow(1 + rate*12 / 100 / 12, 12 * time);
+            const interest = amount - principal;
+            
+            document.getElementById('result').textContent= `Interest (ਵਿਆਜ): ₹${interest.toFixed(2)}\nTotal Amount(ਕੁੱਲ):₹${amount.toFixed(2)}`;
+        } 
+    </script>
+</body>
+</html>
+
