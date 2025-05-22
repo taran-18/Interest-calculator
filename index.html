@@ -24,11 +24,11 @@
             color: #4CAF50;
         }
         input, button {
-            margin: 10px 0;
-            padding: 10px;
+            margin: 12px 0;
+            padding: 14px;
             width: 100%;
-            font-size: 16px;
-            border-radius: 4px;
+            font-size: 18px;
+            border-radius: 6px;
             border: 1px solid #ccc;
         }
         button {
@@ -48,7 +48,13 @@
             border-radius: 4px;
             color: #333;
         }
+        @media (max-width: 500px) {
+    .time-inputs {
+        flex-direction: column;
+    }
+}
     </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="container">
