@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html>
 <head>
@@ -54,9 +56,11 @@
         <form id="interestForm">
             <label for="principal">Principal Amount (₹):</label><br>
             <input type="number" id="principal" name="principal" required><br>
+
             <label for="rate">Monthly Interest Rate (%):</label><br>
             <input type="number" id="rate" name="rate" required><br>
-            <label>Time Period:</label>
+
+         <label>Time Period:</label>
 <div style="display: flex; gap: 10px; justify-content: space-between;">
     <div style="flex: 1;">
         <input type="number" id="years" name="years" min="0" placeholder="Years" required>
@@ -64,29 +68,32 @@
     <div style="flex: 1;">
         <input type="number" id="months" name="months" min="0" max="11" placeholder="Months" required>
     </div>
-</div><br>
+</div>
+
             <button type="button" onclick="calculateInterest()">Calculate</button>
         </form>
         <h2 id="result" class="result"></h2>
     </div>
 
-    <script>
-        function calculateInterest() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const rate = parseFloat(document.getElementById('rate').value);
-            const time = parseFloat(document.getElementById('time').value);
-            
-            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
-                document.getElementById('result').textContent = 'Please enter valid numbers';
-                return;
-            }
-            
-            const amount = principal * Math.pow(1 + rate*12 / 100 / 12, 12 * time);
-            const interest = amount - principal;
-            
-            document.getElementById('result').textContent= `Interest (ਵਿਆਜ): ₹${interest.toFixed(2)}\nTotal Amount(ਕੁੱਲ):₹${amount.toFixed(2)}`;
-        } 
-    </script>
+ <script>
+    function calculateInterest() {
+        const principal = parseFloat(document.getElementById('principal').value) || 0;
+        const rate = parseFloat(document.getElementById('rate').value) || 0;
+        const years = parseFloat(document.getElementById('years').value) || 0;
+        const months = parseFloat(document.getElementById('months').value) || 0;
+
+        if (principal <= 0 || rate < 0 || years < 0 || months < 0) {
+            document.getElementById('result').textContent = 'Please enter valid non-negative values';
+            return;
+        }
+
+        const totalTimeInYears = years + (months / 12);
+        const amount = principal * Math.pow(1 + (rate * 12 / 100 / 12), 12 * totalTimeInYears);
+        const interest = amount - principal;
+
+        document.getElementById('result').textContent = 
+            `Interest (ਵਿਆਜ): ₹${interest.toFixed(2)}\nTotal Amount (ਕੁੱਲ ਰਕਮ): ₹${amount.toFixed(2)}`;
+    }
+</script>
 </body>
 </html>
-
