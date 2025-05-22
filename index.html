@@ -56,8 +56,15 @@
             <input type="number" id="principal" name="principal" required><br>
             <label for="rate">Monthly Interest Rate (%):</label><br>
             <input type="number" id="rate" name="rate" required><br>
-            <label for="time">Time Period (Years):</label><br>
-            <input type="number" id="time" name="time" required><br><br>
+            <label>Time Period:</label>
+<div style="display: flex; gap: 10px; justify-content: space-between;">
+    <div style="flex: 1;">
+        <input type="number" id="years" name="years" min="0" placeholder="Years" required>
+    </div>
+    <div style="flex: 1;">
+        <input type="number" id="months" name="months" min="0" max="11" placeholder="Months" required>
+    </div>
+</div><br>
             <button type="button" onclick="calculateInterest()">Calculate</button>
         </form>
         <h2 id="result" class="result"></h2>
