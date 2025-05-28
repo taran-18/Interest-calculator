@@ -95,15 +95,16 @@
 
     let principal = principalInput;
 
-    // Add compounded interest year by year
+    // Compound annually
     for (let i = 0; i < years; i++) {
         const yearlyInterest = (principal * monthlyRate * 12) / 100;
-        principal += yearlyInterest;
+        principal += yearlyInterest; // compound yearly
     }
 
-    // Add simple interest for the remaining months (not compounded)
-    const remainingInterest = (principal * monthlyRate * months) / 100;
-    const totalAmount = principal + remainingInterest;
+    // Simple interest for remaining months (on updated principal)
+    const finalInterestForMonths = (principal * monthlyRate * months) / 100;
+
+    const totalAmount = principal + finalInterestForMonths;
     const totalInterest = totalAmount - principalInput;
 
     document.getElementById('result').textContent = 
