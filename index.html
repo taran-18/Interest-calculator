@@ -83,23 +83,31 @@
 
  <script>
     function calculateInterest() {
-    const principal = parseFloat(document.getElementById('principal').value) || 0;
+    const principalInput = parseFloat(document.getElementById('principal').value) || 0;
     const monthlyRate = parseFloat(document.getElementById('rate').value) || 0;
-    const years = parseFloat(document.getElementById('years').value) || 0;
-    const months = parseFloat(document.getElementById('months').value) || 0;
+    const years = parseInt(document.getElementById('years').value) || 0;
+    const months = parseInt(document.getElementById('months').value) || 0;
 
-    if (principal <= 0 || monthlyRate < 0 || years < 0 || months < 0) {
+    if (principalInput <= 0 || monthlyRate < 0 || years < 0 || months < 0) {
         document.getElementById('result').textContent = 'Please enter valid non-negative values';
         return;
     }
 
-    const totalYears = years + (months / 12);
-    const annualRate = monthlyRate * 12;
-    const amount = principal * Math.pow(1 + (annualRate / 100), totalYears);
-    const interest = amount - principal;
+    let principal = principalInput;
+
+    // Add compounded interest year by year
+    for (let i = 0; i < years; i++) {
+        const yearlyInterest = (principal * monthlyRate * 12) / 100;
+        principal += yearlyInterest;
+    }
+
+    // Add simple interest for the remaining months (not compounded)
+    const remainingInterest = (principal * monthlyRate * months) / 100;
+    const totalAmount = principal + remainingInterest;
+    const totalInterest = totalAmount - principalInput;
 
     document.getElementById('result').textContent = 
-        `Interest (ਵਿਆਜ): ₹${interest.toFixed(2)}\nTotal Amount (ਕੁੱਲ ਰਕਮ): ₹${amount.toFixed(2)}`;
+        `Interest (ਵਿਆਜ): ₹${totalInterest.toFixed(2)}\nTotal Amount (ਕੁੱਲ ਰਕਮ): ₹${totalAmount.toFixed(2)}`;
 }
 </script>
 </body>
